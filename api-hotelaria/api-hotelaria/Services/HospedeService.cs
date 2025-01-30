@@ -43,4 +43,27 @@ public class HospedeService(Context context, IMapper mapper)
     {
         return await _context.Hospedes.Where(h => h.Cpf == cpf).FirstOrDefaultAsync();
     }
+
+    public async Task<string> AtualizarHospede(UpdateHospedeDto dto)
+    {
+        Hospede? hospedeCadastrado = ObterHospedePorId(dto.Id);
+
+        if (hospedeCadastrado == null)
+            throw new InvalidOperationException("Hóspede não encontrado.");
+
+        Hospede hospede = _mapper.Map(dto, hospedeCadastrado);
+
+        hospede.DataAtualizacao = DateOnly.FromDateTime(DateTime.Now);
+        hospede.HoraAtualizacao = TimeOnly.FromDateTime(DateTime.Now);
+
+        _context.Hospedes.Update(hospede);
+        await _context.SaveChangesAsync();
+
+        return "Hóspede atualizado com sucesso.";
+    }
+
+    public Hospede? ObterHospedePorId(int id)
+    {
+        return _context.Hospedes.Where(h => h.Id == id).FirstOrDefault();
+    }
 }

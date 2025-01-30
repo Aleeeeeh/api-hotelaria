@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace api_hotelaria.Models.Entities;
+namespace api_hotelaria.Services.Dtos;
 
-public class Hospede
+public class UpdateHospedeDto
 {
     public int Id { get; set; }
     [Required(ErrorMessage = "O nome é obrigatório.")]
@@ -21,9 +21,5 @@ public class Hospede
     public int Numero { get; set; }
     public string? Complemento { get; set; }
     public string? Referencia { get; set; }
-    public DateOnly DataCadastro { get; set; }
-    public TimeOnly HoraCadastro { get; set; }
-    public DateOnly DataAtualizacao { get; set; }
-    public TimeOnly HoraAtualizacao { get; set; }
     public bool EstaAtivo { get; set; }
 }

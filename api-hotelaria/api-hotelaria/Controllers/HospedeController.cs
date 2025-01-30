@@ -57,4 +57,21 @@ public class HospedeController(HospedeService service) : ControllerBase
             return StatusCode(500, $"Erro ao obter consulta paginada de hóspedes. Log: {ex.Message}");
         }
     }
+
+    [HttpPut]
+    public async Task<IActionResult> AtualizarHospede([FromBody] UpdateHospedeDto dto)
+    {
+        try
+        {
+            return StatusCode(200, await _service.AtualizarHospede(dto));
+        }
+        catch (InvalidOperationException ex)
+        {
+            return StatusCode(404, ex.Message);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Erro ao atualizar hóspede. Log: {ex.Message}");
+        }
+    }
 }

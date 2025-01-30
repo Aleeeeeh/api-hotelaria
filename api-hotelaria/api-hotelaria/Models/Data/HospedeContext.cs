@@ -33,6 +33,12 @@ namespace api_hotelaria.Models.Data
             builder.Property(h => h.DataCadastro);
 
             builder.Property(h => h.HoraCadastro);
+
+            builder.Property(h => h.DataAtualizacao);
+
+            builder.Property(h => h.HoraAtualizacao);
+
+            builder.Property(h => h.EstaAtivo).HasDefaultValue(true);
         }
     }
 }

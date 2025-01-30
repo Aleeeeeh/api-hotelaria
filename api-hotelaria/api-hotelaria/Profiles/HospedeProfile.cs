@@ -9,5 +9,6 @@ public class HospedeProfile : Profile
     public HospedeProfile()
     {
         CreateMap<PostHospedeDto, Hospede>();
+        CreateMap<UpdateHospedeDto, Hospede>();
     }
 }
