@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using api_hotelaria.Models.Entities;
@@ -11,9 +12,11 @@ using api_hotelaria.Models.Entities;
 namespace api_hotelaria.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20250203095808_adicionado-estareservado-tabela-quarto")]
+    partial class adicionadoestareservadotabelaquarto
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -249,26 +252,6 @@ namespace api_hotelaria.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TipoCustosAdicionais");
-                });
-
-            modelBuilder.Entity("api_hotelaria.Models.Entities.TipoQuarto", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Descricao")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<bool>("EstaAtivo")
-                        .HasColumnType("boolean");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TipoQuartos");
                 });
 #pragma warning restore 612, 618
         }

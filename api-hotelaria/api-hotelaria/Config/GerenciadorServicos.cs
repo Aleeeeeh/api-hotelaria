@@ -8,6 +8,7 @@ public static class GerenciadorServicos
     {
         services.AddAutoMapper(typeof(Program));
         services.AddScoped<HospedeService>();
+        services.AddScoped<QuartoService>();
 
         services.AddControllers();
         services.AddEndpointsApiExplorer();
