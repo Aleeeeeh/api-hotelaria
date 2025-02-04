@@ -14,6 +14,7 @@ public class QuartoService(Context context, IMapper mapper)
     {
         Quarto quarto = _mapper.Map<Quarto>(dto);
 
+        quarto.EstaAtivo = true;
         quarto.EstaReservado = false;
 
         await _context.Quartos.AddAsync(quarto);

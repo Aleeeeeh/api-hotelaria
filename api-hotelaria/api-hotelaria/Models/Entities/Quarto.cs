@@ -11,6 +11,8 @@ public class Quarto
     public decimal ValorDiaria { get; set; }
     [Required(ErrorMessage = "O número do quarto é obrigatório.")]
     public int NumeroQuarto { get; set; }
+    [Required(ErrorMessage = "O tipo do quarto é obrigatório.")]
+    public string TipoQuarto { get; set; } = null!;
     public bool EstaAtivo { get; set; }
     public bool EstaReservado { get; set; }
 }

@@ -11,5 +11,5 @@ public class PostQuartoDto
     [Required(ErrorMessage = "O número do quarto é obrigatório.")]
     public int NumeroQuarto { get; set; }
     [Required(ErrorMessage = "O tipo do quarto é obrigatório.")]
-    public int TipoQuarto { get; set; }
+    public string TipoQuarto { get; set; } = null!;
 }
