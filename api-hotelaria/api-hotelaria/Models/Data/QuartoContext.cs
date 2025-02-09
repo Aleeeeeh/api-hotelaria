@@ -19,7 +19,5 @@ public class QuartoContext : IEntityTypeConfiguration<Quarto>
         builder.Property(q => q.TipoQuarto).IsRequired();
 
         builder.Property(q => q.EstaAtivo);
-
-        builder.Property(q => q.EstaReservado);
     }
 }

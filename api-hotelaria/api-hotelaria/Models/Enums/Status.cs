@@ -2,7 +2,8 @@
 
 public enum Status
 {
-    Pendente = 1,
-    Confirmada = 2,
-    Cancelada = 3
+    Confirmada = 1,
+    Cancelada = 2,
+    Expirada = 3,
+    Finalizada = 4
 }

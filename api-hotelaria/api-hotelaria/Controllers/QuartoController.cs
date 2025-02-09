@@ -43,11 +43,11 @@ public class QuartoController(QuartoService service) : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<Quarto>>> ObterListaDeQuartoDisponiveis()
+    public async Task<ActionResult<List<Quarto>>> ObterListaDeQuartos()
     {
         try
         {
-            return StatusCode(200, await _service.ObterQuartoDisponiveis());
+            return StatusCode(200, await _service.ObterQuartos());
         }
         catch (Exception ex)
         {

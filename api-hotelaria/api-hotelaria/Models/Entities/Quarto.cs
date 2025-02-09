@@ -14,5 +14,4 @@ public class Quarto
     [Required(ErrorMessage = "O tipo do quarto é obrigatório.")]
     public string TipoQuarto { get; set; } = null!;
     public bool EstaAtivo { get; set; }
-    public bool EstaReservado { get; set; }
 }

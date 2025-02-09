@@ -1,4 +1,5 @@
 ﻿using api_hotelaria.Models.Entities;
+using api_hotelaria.Models.Enums;
 using api_hotelaria.Services.Dtos;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
@@ -15,7 +16,6 @@ public class QuartoService(Context context, IMapper mapper)
         Quarto quarto = _mapper.Map<Quarto>(dto);
 
         quarto.EstaAtivo = true;
-        quarto.EstaReservado = false;
 
         await _context.Quartos.AddAsync(quarto);
         await _context.SaveChangesAsync();
@@ -36,13 +36,32 @@ public class QuartoService(Context context, IMapper mapper)
         await _context.SaveChangesAsync();
     }
 
-    public async Task<Quarto?> ObterQuartoPorId(int id)
+    public async Task<Quarto> ObterQuartoPorId(int id)
     {
-        return await _context.Quartos.Where(q => q.Id == id).FirstOrDefaultAsync();
+        Quarto quarto = await _context.Quartos.Where(q => q.Id == id).FirstOrDefaultAsync() ?? throw new InvalidOperationException("Quarto não encontrado.");
+
+        return quarto;
     }
 
-    public async Task<List<Quarto>> ObterQuartoDisponiveis()
+    public async Task<List<Quarto>> ObterQuartos()
     {
-        return await _context.Quartos.Where(q => q.EstaReservado == false).ToListAsync();
+        return await _context.Quartos.ToListAsync();
+    }
+
+    public async Task<bool> VerificarSeQuartoEstaDisponivel(int id, DateOnly checkin, DateOnly checkout)
+    {
+        bool quartoJaReservado = await _context.Reservas.AnyAsync(r =>
+        r.Quarto == id &&
+        (r.Status == Status.Confirmada || r.Status == Status.Expirada) &&
+        (
+            (checkin >= r.CheckIn && checkin < r.CheckOut) ||
+            (checkout > r.CheckIn && checkout <= r.CheckOut) ||
+            (checkin <= r.CheckIn && checkout >= r.CheckOut)
+        ));
+
+        if (quartoJaReservado)
+            throw new InvalidOperationException("O quarto já está reservado.");
+
+        return true;
     }
 }
